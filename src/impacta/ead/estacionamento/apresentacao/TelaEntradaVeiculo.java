@@ -8,10 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import impacta.ead.estacionamento.controle.EstacionamentoController;
+import impacta.ead.estacionamento.controle.EstacionamentoException;
+import impacta.ead.estacionamento.controle.VeiculoException;
 
 public class TelaEntradaVeiculo extends JFrame implements ActionListener{
 	JFrame parent;
@@ -98,7 +101,14 @@ public class TelaEntradaVeiculo extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent evento) {
 		if(evento.getActionCommand().equals("ok")) {
 			EstacionamentoController controle = new EstacionamentoController();
-			controle.processarEntrada(txfPlaca.getText(), txtMarca.getText(), txtModelo.getText(), txtCor.getText());
+			try {
+				controle.processarEntrada(txfPlaca.getText(), txtMarca.getText(), txtModelo.getText(), txtCor.getText());
+
+				JOptionPane.showMessageDialog(null, "Veiculo Registrado com sucesso","Entrada de Veiculo", JOptionPane.INFORMATION_MESSAGE);
+				
+			} catch (EstacionamentoException | VeiculoException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(),"Falha na Entrada", JOptionPane.ERROR_MESSAGE);
+			}
 			
 		
 		}

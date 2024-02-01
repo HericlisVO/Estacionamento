@@ -1,5 +1,8 @@
 package impacta.ead.estacionamento.utilitario;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import impacta.ead.estacionamento.negocio.Movimentacao;
 
 /*
@@ -16,7 +19,7 @@ public class EstacionamentoUtil {
 	 * 
 	 * @return true se atender o padrão e false senão
 	 */
-	public boolean validarPadraoPadrao() {
+	public boolean validarPadraoPlaca() {
 		// TODO implementar
 		return false;
 	}
@@ -36,6 +39,16 @@ public class EstacionamentoUtil {
 	 */
 	public void calcularPagamento(Movimentacao movimentacao) {
 		// TODO implementar
+	}
+
+
+	public static boolean validarPadrãoPlaca(String placa) {
+		String padrao ="[A_Z][A_Z][A_Z]-\\d\\d\\d\\d";
+		Pattern p = Pattern.compile(padrao); 
+		Matcher m = p.matcher(placa);
+		
+		
+		return m.matches();
 	}
 
 }
